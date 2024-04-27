@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,16 +24,16 @@ public class jdbcTemplateBoardReposiroty{
 
     //게시판 생성
     public Board save(Board board) {
-        String sql = "insert into board(board_title, description) values(?, ?)";
-        int postId = jdbcTemplate.update(sql, board.getBoard_title(), board.getDescription());
+        String sql = "INSERT INTO board(board_title, description, created_date, modified_date) VALUES(?, ?, ?, ?)";
+        int postId = jdbcTemplate.update(sql, board.getBoardTitle(), board.getDescription(), LocalDateTime.now(), LocalDateTime.now());
         board.setId((long) postId);
         return board;
     }
 
     //게시판 수정
     public int update(Board board) {
-        String sql = "update board set board_title = ? where id = ?";
-        int result = jdbcTemplate.update(sql, board.getBoard_title(), board.getId());
+        String sql = "UPDATE board SET board_title = ?, description = ?, modified_date = ? WHERE id = ?";
+        int result = jdbcTemplate.update(sql, board.getBoardTitle(), board.getDescription(), LocalDateTime.now(), board.getId());
         return result;
     }
 
@@ -58,7 +59,7 @@ public class jdbcTemplateBoardReposiroty{
         return (rs, rowNum) -> {
             Board board = new Board();
             board.setId(rs.getLong("id"));
-            board.setBoard_title(rs.getString("board_title"));
+            board.setBoardTitle(rs.getString("board_title"));
             board.setDescription(rs.getString("description"));
             return board;
         };

@@ -19,7 +19,7 @@ public class Board extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String board_title;
+    private String boardTitle;
     private String description;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
