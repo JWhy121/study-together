@@ -19,15 +19,15 @@ public class Post extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date due_date;
+    private Date dueDate;
     private String nickname;
-    private String dev_lang;
+    private String devLang;
     private String title;
     private String content;
-    private int watched_cnt;
+    private int watchedCnt;
     private boolean completed;
 
     @ManyToOne
-    @JoinColumn(name = "board_id", referencedColumnName = "id")
+    @JoinColumn(name = "boardId", referencedColumnName = "id")
     private Board board;
 }

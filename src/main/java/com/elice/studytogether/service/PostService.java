@@ -2,8 +2,6 @@ package com.elice.studytogether.service;
 
 
 import com.elice.studytogether.domain.Post;
-import com.elice.studytogether.dto.BoardPostDto;
-import com.elice.studytogether.dto.BoardResponseDto;
 import com.elice.studytogether.dto.PostDto;
 import com.elice.studytogether.dto.PostResponseDto;
 import com.elice.studytogether.repository.PostRepository;
@@ -25,8 +23,8 @@ public class PostService {
         this.boardService = boardService;
     }
 
-    public List<PostResponseDto> retrieveAllPosts(){
-        return ((List<Post>) postRepository.findAll()).stream()
+    public List<PostResponseDto> retrieveAllPosts(Long id){
+        return ((List<Post>) postRepository.findByBoardId(id)).stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -44,6 +42,10 @@ public class PostService {
         post.setContent(postDto.getContent());
         Post savedPost = postRepository.save(post);
         return convertToDto(savedPost);
+    }
+
+    public List<Post> searchPostByKeyword(String keyword){
+        return postRepository.findByTitleContaining(keyword);
     }
 
 //    public PostResponseDto savePost(PostDto postDto) {

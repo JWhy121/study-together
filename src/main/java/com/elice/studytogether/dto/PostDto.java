@@ -11,7 +11,7 @@ import lombok.Setter;
 public class PostDto {
     private String title;
     private String content;
-    private Long board_id;
+    private Long boardId;
 
     public Post toEntity(){
         Post post = new Post();
@@ -19,7 +19,7 @@ public class PostDto {
         post.setContent(content);
 
         Board board = new Board();
-        board.setId(board_id);
+        board.setId(boardId);
 
         post.setBoard(board);
 
