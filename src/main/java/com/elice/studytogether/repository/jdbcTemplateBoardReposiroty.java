@@ -51,7 +51,13 @@ public class jdbcTemplateBoardReposiroty{
 
     //게시판 삭제
     public void deleteById(Long id) {
-        String sql = "DELETE FROM board WHERE id = ?";
+        String sql = "DELETE FROM comment WHERE post_id IN (SELECT id FROM post WHERE board_id = ?)";
+        jdbcTemplate.update(sql, id);
+
+        sql = "DELETE FROM post WHERE board_id = ?";
+        jdbcTemplate.update(sql, id);
+
+        sql = "DELETE FROM board WHERE id = ?";
         jdbcTemplate.update(sql, id);
     }
 
