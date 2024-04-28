@@ -3,9 +3,7 @@ package com.elice.studytogether.controller;
 
 import com.elice.studytogether.domain.Board;
 import com.elice.studytogether.domain.Post;
-import com.elice.studytogether.dto.BoardPostDto;
-import com.elice.studytogether.dto.PostDto;
-import com.elice.studytogether.dto.PostResponseDto;
+import com.elice.studytogether.dto.*;
 import com.elice.studytogether.service.BoardService;
 import com.elice.studytogether.service.PostService;
 import org.slf4j.Logger;
@@ -50,6 +48,16 @@ public class PostController {
 
     }
 
+    //게시블 수정 뷰
+    @GetMapping("{id}/edit")
+    public String updateBoardView(@PathVariable("id") Long id, Model model){
+        PostResponseDto postResponseDto = postService.retrievePostById(id);
+        Post post = postResponseDto.toEntity();
+        post.setId(id);
+        model.addAttribute("post", post);
+        return "post/editPost";
+    }
+
 
     //게시글 생성 뷰
     @GetMapping("/create")
@@ -65,14 +73,28 @@ public class PostController {
     //게시글 생성
     @PostMapping("/create")
     public String createPost(@RequestParam("boardId") Long id, @ModelAttribute PostDto postDto){
-
-        logger.info("Received boardId: {}", id);
         postDto.setBoardId(id);
         postService.savePost(postDto);
 
         return "redirect:/boards/" + id;
     }
 
+    //게시글 수정
+    @PostMapping("{id}/edit")
+    public String updatePost(@PathVariable("id") Long id, @ModelAttribute PostPutDto postPutDto){
+        postService.putPost(id, postPutDto);
 
+        return "redirect:/posts/" + id;
+    }
 
+    //게시글 삭제
+    @DeleteMapping("{id}")
+    public String deletePost(@PathVariable("id") Long id){
+        Post post = postService.retrievePostById(id).toEntity();
+
+        postService.deletePost(id);
+
+        return "redirect:/boards/" + post.getBoard().getId();
+    }
+    
 }
