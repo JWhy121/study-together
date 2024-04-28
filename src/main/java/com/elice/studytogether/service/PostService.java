@@ -45,8 +45,18 @@ public class PostService {
         return convertToDto(savedPost);
     }
 
-    public List<Post> searchPostByKeyword(String keyword){
-        return postRepository.findByTitleContaining(keyword);
+
+//    public PostResponseDto savePost(PostDto postDto) {
+//        Post post = postDto.toEntity();
+//        if (postDto.getBoard_id() != null) {
+//            BoardResponseDto board = boardService.retrieveBoardById(postDto.getBoard_id());
+//            post.setBoard(board.toEntity());
+//        }
+//        return new PostResponseDto(postRepository.save(post));
+//    }
+
+    public Page<Post> searchPostByKeyword(String keyword, Pageable pageable){
+        return postRepository.findByTitleContaining(keyword, pageable);
     }
 
     public PostResponseDto putPost(Long id, PostPutDto postPutDto){
@@ -61,18 +71,6 @@ public class PostService {
     }
 
     public void deletePost(Long id) {postRepository.deleteById(id);}
-
-
-
-
-//    public PostResponseDto savePost(PostDto postDto) {
-//        Post post = postDto.toEntity();
-//        if (postDto.getBoard_id() != null) {
-//            BoardResponseDto board = boardService.retrieveBoardById(postDto.getBoard_id());
-//            post.setBoard(board.toEntity());
-//        }
-//        return new PostResponseDto(postRepository.save(post));
-//    }
 
 
 

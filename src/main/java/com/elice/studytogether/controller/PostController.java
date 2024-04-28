@@ -2,9 +2,11 @@ package com.elice.studytogether.controller;
 
 
 import com.elice.studytogether.domain.Board;
+import com.elice.studytogether.domain.Comment;
 import com.elice.studytogether.domain.Post;
 import com.elice.studytogether.dto.*;
 import com.elice.studytogether.service.BoardService;
+import com.elice.studytogether.service.CommentService;
 import com.elice.studytogether.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,19 +25,25 @@ public class PostController {
 
     private final PostService postService;
     private final BoardService boardService;
+    private final CommentService commentService;
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
     @Autowired
-    public PostController(PostService postService, BoardService boardService){
+    public PostController(PostService postService, BoardService boardService, CommentService commentService){
 
         this.postService = postService;
         this.boardService = boardService;
+        this.commentService = commentService;
     }
 
     //게시글 뷰
     @GetMapping("/{boardId}")
     public String getPostView(@PathVariable("boardId") Long id, Model model){
         PostResponseDto post = postService.retrievePostById(id);
+
+        List<Comment> comments = commentService.retrieveAllComments(id);
+
+        model.addAttribute("comments", comments);
 
         if(post == null) {
             // post 객체가 null인 경우, 404 에러를 반환하거나 다른 처리를 수행할 수 있습니다.
@@ -96,5 +104,5 @@ public class PostController {
 
         return "redirect:/boards/" + post.getBoard().getId();
     }
-    
+
 }
