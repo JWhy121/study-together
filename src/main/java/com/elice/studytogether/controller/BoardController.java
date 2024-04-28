@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import java.util.List;
 
 @Controller
@@ -41,18 +44,21 @@ public class BoardController {
 
     //게시판 뷰
     @GetMapping("/{id}")
-    public String getBoardView(@PathVariable("id") Long id,@RequestParam(name = "keyword",required = false) String keyword, Model model){
+    public String getBoardView(@PathVariable("id") Long id,@RequestParam(name = "keyword",required = false) String keyword,
+                               Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+                               @RequestParam(value = "size", defaultValue = "10") int size){
 
         Board board = boardService.getBoardById(id);
 
 
+        PageRequest pageable = PageRequest.of(page, size);
 
         if (keyword != null && !keyword.isEmpty()) {
             List<Post> ContainingkeywordPosts = postService.searchPostByKeyword(keyword);
             model.addAttribute("postPage", ContainingkeywordPosts);
 
         }else {
-            List<PostResponseDto> posts = postService.retrieveAllPosts(id);
+            Page<PostResponseDto> posts = postService.retrieveAllPosts(id, pageable);
             model.addAttribute("postPage", posts);
         }
 

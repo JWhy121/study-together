@@ -3,14 +3,16 @@ package com.elice.studytogether.service;
 
 import com.elice.studytogether.domain.Post;
 import com.elice.studytogether.dto.PostDto;
+import com.elice.studytogether.dto.PostPutDto;
 import com.elice.studytogether.dto.PostResponseDto;
 import com.elice.studytogether.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -23,10 +25,9 @@ public class PostService {
         this.boardService = boardService;
     }
 
-    public List<PostResponseDto> retrieveAllPosts(Long id){
-        return ((List<Post>) postRepository.findByBoardId(id)).stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
+    public Page<PostResponseDto> retrieveAllPosts(Long id, Pageable pageable){
+        Page<Post> postPage = postRepository.findByBoardId(id, pageable);
+        return postPage.map(this::convertToDto);
     }
 
     public PostResponseDto retrievePostById(Long id) {
@@ -47,6 +48,22 @@ public class PostService {
     public List<Post> searchPostByKeyword(String keyword){
         return postRepository.findByTitleContaining(keyword);
     }
+
+    public PostResponseDto putPost(Long id, PostPutDto postPutDto){
+        return postRepository.findById(id)
+                .map(existingPost -> {
+                    existingPost.setTitle(postPutDto.getTitle());
+                    existingPost.setContent(postPutDto.getContent());
+                    Post updatedPost = postRepository.save(existingPost);
+                    return convertToDto(updatedPost);
+                })
+                .orElseThrow(() -> new IllegalStateException("Post with id " + id + "does note exist"));
+    }
+
+    public void deletePost(Long id) {postRepository.deleteById(id);}
+
+
+
 
 //    public PostResponseDto savePost(PostDto postDto) {
 //        Post post = postDto.toEntity();
