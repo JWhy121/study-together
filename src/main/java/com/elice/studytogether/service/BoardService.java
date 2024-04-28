@@ -5,6 +5,7 @@ import com.elice.studytogether.domain.Board;
 import com.elice.studytogether.dto.BoardPostDto;
 import com.elice.studytogether.dto.BoardResponseDto;
 import com.elice.studytogether.repository.jdbcTemplateBoardReposiroty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class BoardService {
 
     private final jdbcTemplateBoardReposiroty boardReposiroty;
 
+    @Autowired
     public BoardService(jdbcTemplateBoardReposiroty boardRepository){
         this.boardReposiroty = boardRepository;
     }
