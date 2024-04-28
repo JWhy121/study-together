@@ -80,8 +80,12 @@ public class PostController {
 
     //게시글 생성
     @PostMapping("/create")
-    public String createPost(@RequestParam("boardId") Long id, @ModelAttribute PostDto postDto){
+    public String createPost(@RequestParam("boardId") Long id,
+                             @RequestParam("language") String language,
+                             @ModelAttribute PostDto postDto){
+
         postDto.setBoardId(id);
+        postDto.setDevLang(language);
         postService.savePost(postDto);
 
         return "redirect:/boards/" + id;
@@ -89,7 +93,11 @@ public class PostController {
 
     //게시글 수정
     @PostMapping("{id}/edit")
-    public String updatePost(@PathVariable("id") Long id, @ModelAttribute PostPutDto postPutDto){
+    public String updatePost(@PathVariable("id") Long id,
+                             @RequestParam("language") String language,
+                             @ModelAttribute PostPutDto postPutDto){
+
+        postPutDto.setDevLang(language);
         postService.putPost(id, postPutDto);
 
         return "redirect:/posts/" + id;

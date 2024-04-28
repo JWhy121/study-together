@@ -11,6 +11,8 @@ public class PostPutDto {
     private String title;
     private String content;
     private Long boardId;
+    private String devLang;
+    private String nickname;
 
     public Post toEntity(){
         Post post = new Post();
@@ -21,6 +23,8 @@ public class PostPutDto {
         board.setId(boardId);
 
         post.setBoard(board);
+        post.setDevLang(devLang);
+        post.setNickname(nickname);
 
 
         return post;

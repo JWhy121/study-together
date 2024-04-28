@@ -14,6 +14,7 @@ public class PostResponseDto {
     private String title;
     private String content;
     private Long boardId;
+    private String nickname;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -24,6 +25,7 @@ public class PostResponseDto {
         this.boardId = post.getBoard().getId();
         this.createdDate = post.getCreatedDate();
         this.modifiedDate = post.getModifiedDate();
+        this.nickname = post.getNickname();
     }
 
     public Post toEntity() {
@@ -31,6 +33,7 @@ public class PostResponseDto {
         post.setId(id);
         post.setTitle(title);
         post.setContent(content);
+        post.setNickname(nickname);
 
         Board board = new Board();
         board.setId(boardId);

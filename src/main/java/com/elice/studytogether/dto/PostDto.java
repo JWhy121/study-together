@@ -9,9 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PostDto {
+    private Long boardId;
     private String title;
     private String content;
-    private Long boardId;
+    private String devLang;
+    private String nickname;
+
 
     public Post toEntity(){
         Post post = new Post();
@@ -22,6 +25,8 @@ public class PostDto {
         board.setId(boardId);
 
         post.setBoard(board);
+        post.setDevLang(devLang);
+        post.setNickname(nickname);
 
 
         return post;

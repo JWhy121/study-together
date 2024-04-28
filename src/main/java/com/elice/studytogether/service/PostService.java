@@ -5,6 +5,7 @@ import com.elice.studytogether.domain.Post;
 import com.elice.studytogether.dto.PostDto;
 import com.elice.studytogether.dto.PostPutDto;
 import com.elice.studytogether.dto.PostResponseDto;
+import com.elice.studytogether.mapper.PostMapper;
 import com.elice.studytogether.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,11 +19,13 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
     private final BoardService boardService;
+    private final PostMapper postMapper;
 
     @Autowired
-    public PostService(PostRepository postRepository, BoardService boardService) {
+    public PostService(PostRepository postRepository, BoardService boardService, PostMapper postMapper) {
         this.postRepository = postRepository;
         this.boardService = boardService;
+        this.postMapper = postMapper;
     }
 
     public Page<PostResponseDto> retrieveAllPosts(Long id, Pageable pageable){
@@ -37,13 +40,17 @@ public class PostService {
     }
 
     public PostResponseDto savePost(PostDto postDto) {
+
         Post post = new Post();
         post.setBoard(postDto.toEntity().getBoard());
         post.setTitle(postDto.getTitle());
         post.setContent(postDto.getContent());
+        post.setDevLang(postDto.getDevLang());
+        post.setNickname(postDto.getNickname());
         Post savedPost = postRepository.save(post);
         return convertToDto(savedPost);
     }
+
 
 
 //    public PostResponseDto savePost(PostDto postDto) {
@@ -64,6 +71,8 @@ public class PostService {
                 .map(existingPost -> {
                     existingPost.setTitle(postPutDto.getTitle());
                     existingPost.setContent(postPutDto.getContent());
+                    existingPost.setDevLang(postPutDto.getDevLang());
+                    existingPost.setNickname(postPutDto.getNickname());
                     Post updatedPost = postRepository.save(existingPost);
                     return convertToDto(updatedPost);
                 })
