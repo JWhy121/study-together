@@ -62,15 +62,20 @@
       </div>
       <div class="list-group position-relative mb-3">
         <a
-          class="board-item list-group-item p-3 list-group-item-action"
+          class="board-item list-group-item p-3 list-group-item-action d-flex"
           th:unless="${postPage.isEmpty()}"
           th:each="post : ${postPage}"
           th:href="@{/posts/{postId}(postId=${post.id})}"
         >
-          <h4 class="fw-bold mb-1" th:text="${post.title}">게시글 제목</h4>
-          <small class="text-secondary" th:text="${post.createdDate}"
+          <div>
+            <h4 class="fw-bold mb-1" th:text="${post.title}">게시글 제목</h4>
+            <small class="text-secondary" th:text="${post.createdDate}"
             >게시글 생성일</small
-          >
+            >
+          </div>
+<!--          <div class="fw-bold mb-1 align-self-end ms-auto p-1" th:text="${post.completed}>">-->
+<!--            스터디원 모집 중-->
+<!--          </div>-->
         </a>
         <span
           th:if="${postPage.isEmpty()}"

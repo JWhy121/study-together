@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommentPutDto {
-    private Long postId;
     private String content;
+    private String nickname;
+    private String password;
 }

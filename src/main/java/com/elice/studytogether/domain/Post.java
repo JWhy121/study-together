@@ -36,6 +36,6 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "boardId", referencedColumnName = "id")
     private Board board;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 }

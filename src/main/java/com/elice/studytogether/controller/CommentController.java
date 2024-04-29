@@ -35,14 +35,14 @@ public class CommentController {
     }
 
     @PostMapping
-    public String putComments(@RequestParam("postId") Long postId, CommentPostDto commentPostDto){
+    public String saveComments(@RequestParam("postId") Long postId, CommentPostDto commentPostDto){
         commentService.saveComment(postId, commentPostDto);
 
         return "redirect:/posts/" + postId;
     }
 
     @PostMapping("/{commentId}/edit")
-    public String updateBoard(@PathVariable("commentId") Long commentId, @ModelAttribute CommentPutDto commentPutDto){
+    public String updateComment(@PathVariable("commentId") Long commentId, @ModelAttribute CommentPutDto commentPutDto){
 
         Comment comment = commentService.retrieveCommentById(commentId);
 
@@ -51,13 +51,10 @@ public class CommentController {
         return "redirect:/posts/" + comment.getPost().getId();
     }
 
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable("commentId") Long commentId){
+        commentService.deleteComment(commentId);
+    }
 
-    //게시판 삭제
-//    @DeleteMapping("/{id}/delete")
-//    public String deleteBoard(@PathVariable("id") Long id){
-//        System.out.println(id);
-//        boardService.deleteBoardById(id);
-//        return "redirect:/boards";
-//    }
 
 }

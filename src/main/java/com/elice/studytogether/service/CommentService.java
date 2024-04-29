@@ -41,6 +41,8 @@ public class CommentService {
         post.setId(postId);
         comment.setPost(post);
         comment.setContent(commentPostDto.getContent());
+        comment.setNickname(commentPostDto.getNickname());
+        comment.setPassword(commentPostDto.getPassword());
         commentRepository.save(comment);
 
         CommentResponseDto commentResponseDto = mapper.commentToCommentResponseDto(comment);
@@ -56,6 +58,10 @@ public class CommentService {
                     return convertToDto(updatedComment);
                 })
                 .orElseThrow(() -> new IllegalStateException("Comment with id " + commentId + "does note exist"));
+    }
+
+    public void deleteComment(Long commentId){
+        commentRepository.deleteById(commentId);
     }
 
     private CommentResponseDto convertToDto(Comment comment) {

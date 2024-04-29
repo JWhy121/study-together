@@ -12,5 +12,7 @@ public class CommentResponseDto {
     private Long id;
     private Long postId;
     private String content;
+    private String nickname;
+    private String password;
 
 }
