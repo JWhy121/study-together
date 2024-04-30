@@ -43,8 +43,10 @@
   >게시판으로 돌아가기</a
   >
   <div class="container border rounded p-4 position-relative">
-    <div class="header mb-3">
+    <div class="header mb-3 d-flex">
       <h2 class="text-start" th:text="${post.title}">게시글 제목</h2>
+      <p class="mx-4">개발 언어</p>
+      <p class="" th:text="${post.devLang}">개발 언어</p>
     </div>
     <p class="m-0" th:text="${post.content}">게시글 내용</p>
     <hr class="mt-4" />
