@@ -53,8 +53,19 @@ public class CommentService {
     }
 
     public CommentResponseDto updateComment(Long commentId, CommentPutDto commentPutDto){
+
         return commentRepository.findById(commentId)
                 .map(existingComment -> {
+                    //form으로부터 받아온 password
+                    String passwordFromDto = commentPutDto.getPassword();
+
+                    //기존 데이터에 있는 password 확인
+                    String savedPassword = existingComment.getPassword();
+
+                    if(!passwordFromDto.equals(savedPassword)){
+                        throw new IllegalArgumentException("password is fault. please check again.");
+                    }
+
                     existingComment.setContent(commentPutDto.getContent());
                     Comment updatedComment = commentRepository.save(existingComment);
                     return convertToDto(updatedComment);
