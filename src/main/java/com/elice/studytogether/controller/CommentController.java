@@ -51,8 +51,9 @@ public class CommentController {
         return "redirect:/posts/" + postId;
     }
 
+    //댓글 수정
     @PostMapping("/{commentId}/edit")
-    public ResponseEntity<?> updateComment(@PathVariable("commentId") Long commentId, @ModelAttribute CommentPutDto commentPutDto, Model model) {
+    public ResponseEntity<?> updateComment(@PathVariable("commentId") Long commentId, @ModelAttribute CommentPutDto commentPutDto) {
         Comment comment = commentService.retrieveCommentById(commentId);
         try {
             CommentResponseDto responseDto = commentService.updateComment(commentId, commentPutDto);
@@ -67,8 +68,15 @@ public class CommentController {
     }
 
     @DeleteMapping("/{commentId}")
-    public void deleteComment(@PathVariable("commentId") Long commentId){
-        commentService.deleteComment(commentId);
+    public ResponseEntity<?> deleteComment(@PathVariable("commentId") Long commentId, @RequestBody Map<String, String> requestBody){
+        String password = requestBody.get("password");
+        boolean isPasswordCorrect = commentService.checkPassword(commentId, password);
+        if(isPasswordCorrect) {
+            commentService.deleteComment(commentId);
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
 

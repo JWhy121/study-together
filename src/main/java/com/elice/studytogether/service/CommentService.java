@@ -77,6 +77,18 @@ public class CommentService {
         commentRepository.deleteById(commentId);
     }
 
+    public boolean checkPassword(Long commentId, String password) {
+        Optional<Comment> comment = commentRepository.findById(commentId);
+        if(comment.isPresent()){
+            Comment getComment = comment.get();
+
+            return getComment.getPassword().equals(password);
+        }
+
+        return false;
+    }
+
+
     private CommentResponseDto convertToDto(Comment comment) {
         return new CommentResponseDto();
     }
