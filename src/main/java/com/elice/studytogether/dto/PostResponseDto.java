@@ -16,6 +16,7 @@ public class PostResponseDto {
     private Long boardId;
     private String nickname;
     private String devLang;
+    private boolean completed;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -28,6 +29,7 @@ public class PostResponseDto {
         this.modifiedDate = post.getModifiedDate();
         this.nickname = post.getNickname();
         this.devLang = post.getDevLang();
+        this.completed = post.isCompleted();
     }
 
     public Post toEntity() {
@@ -41,6 +43,7 @@ public class PostResponseDto {
         Board board = new Board();
         board.setId(boardId);
         post.setBoard(board);
+        post.setCompleted(completed);
 
         post.setCreatedDate(createdDate);
         post.setModifiedDate(modifiedDate);

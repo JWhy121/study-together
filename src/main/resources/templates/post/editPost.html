@@ -83,16 +83,34 @@
             name="content"
             placeholder="내용 입력"
             th:text="${post.content}"
+            style="min-height: 250px"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">수정</button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="window.history.back();"
-        >
-          취소
-        </button>
+        <div class="d-flex gap-1 position-relative">
+          <button type="submit" class="btn btn-primary">수정</button>
+          <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onclick="window.history.back();"
+          >
+            취소
+          </button>
+          <div class="position-absolute bottom-0 end-0 d-flex gap-2 fs-5">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="completedRadio" id="incompleted" value="incompleted" th:checked="${post.completed == false}">
+              <label class="form-check-label" for="incompleted">
+                모집중
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="completedRadio" id="completed" value="completed" th:checked="${post.completed == true}">
+              <label class="form-check-label" for="completed">
+                모집 완료
+              </label>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
 

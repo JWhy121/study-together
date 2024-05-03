@@ -45,10 +45,11 @@
   <div class="container border rounded p-4 position-relative">
     <div class="header mb-3 d-flex">
       <h2 class="text-start" th:text="${post.title}">게시글 제목</h2>
-      <p class="mx-4">개발 언어</p>
-      <p class="" th:text="${post.devLang}">개발 언어</p>
+      <p class="mx-3">개발 언어</p>
+      <p class="text-primary fw-bold" th:text="${post.devLang}">개발 언어</p>
     </div>
-    <p class="m-0" th:text="${post.content}">게시글 내용</p>
+    <hr class="mt-4" />
+    <p class="m-0 mt-4" th:text="${post.content}">게시글 내용</p>
     <hr class="mt-4" />
     <h4 class="mb-3">댓글
       <small class="text-secondary" id="commentsCount" th:text="${comments.size()}">0</small>
@@ -127,6 +128,7 @@
           </button>
         </li>
       </ul>
+      <p class="text-primary mt-1 fw-bold fs-5" th:text="${post.completed == false ? '모집 중' : '모집 완료'}">모집 현황</p>
     </div>
   </div>
 </div>
@@ -204,6 +206,11 @@
       </div>
       <div class="modal-body">
         <p class="fw-light">해당 댓글이 삭제됩니다.</p>
+        <form id="commentDeleteForm">
+          <div class="modal-body">
+            <input type="password" name="password" maxlength="4" class="form-control mt-0" id="deleteCommentPassword" placeholder="4자리 비밀번호" required>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -242,16 +249,37 @@
   }
 
   function handleDeleteCommentModalButton() {
-    fetch(`/comments/${currentComment}`, {
-      method: 'DELETE',
-    }).then(() => elementToDelete.remove());
+  const password = document.getElementById('deleteCommentPassword').value;
 
-    const commentsCount = document.getElementById('commentsCount');
-    commentsCount.innerText = parseInt(commentsCount.innerText) - 1;
+  fetch(`/comments/${currentComment}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ password: password }), // 비밀번호를 JSON 형식으로 전송
+  })
+  .then(response => {
+    if (response.ok) {
+      // 서버에서 성공적인 응답을 받았을 때
+      alert('댓글이 삭제되었습니다.');
+      elementToDelete.remove();
 
-    const modal = bootstrap.Modal.getInstance('#deleteCommentModal');
-    modal.hide();
-  }
+      const commentsCount = document.getElementById('commentsCount');
+      commentsCount.innerText = parseInt(commentsCount.innerText) - 1;
+
+      const modal = bootstrap.Modal.getInstance('#deleteCommentModal');
+      modal.hide();
+    } else {
+      // 서버에서 오류 응답을 받았을 때
+      alert('댓글 삭제에 실패했습니다. 비밀번호를 확인해주세요.');
+    }
+  })
+  .catch(error => {
+    // 요청 처리 중 오류 발생 시
+    console.error('Error:', error);
+    alert('요청 처리 중 오류가 발생했습니다.');
+  });
+}
 
   function handleEditCommentButton(_, commentId, content) {
     document.getElementById('commentContentTextarea').innerText = content;
@@ -272,13 +300,11 @@
         .then(response => {
             if (response.ok) {
                 // 서버에서 성공적인 응답을 받았을 때
-                alert('댓글이 성공적으로 수정되었습니다.');
+                alert('댓글이 수정되었습니다.');
                 location.reload();
-                // 원하는 추가 동작을 수행할 수 있습니다.
-            } else {
+            } else if(response.status === 401){
                 // 서버에서 오류 응답을 받았을 때
-                alert('댓글 수정에 실패했습니다.');
-                // 원하는 실패 처리 동작을 수행할 수 있습니다.
+                alert('비밀번호가 틀립니다. 다시 확인해주세요.');
             }
         })
         .catch(error => {

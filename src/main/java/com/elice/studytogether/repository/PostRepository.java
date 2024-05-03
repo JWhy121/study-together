@@ -14,6 +14,8 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findByBoardId(Long boardId, Pageable pageable);
 
+    Page<Post> findByBoardIdOrderByCompletedAsc(Long boardId, Pageable pageable);
+
 
     Page<Post> findByTitleContaining(String keyword, Pageable pageable);
 }

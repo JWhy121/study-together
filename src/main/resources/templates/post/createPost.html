@@ -40,6 +40,18 @@
           />
         </div>
         <div class="mb-3">
+          <label for="password">비밀번호</label>
+          <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  maxlength="4"
+                  placeholder="비밀번호 (4자리 숫자만 입력해주세요)"
+                  required
+          />
+        </div>
+        <div class="mb-3">
           <label for="title">게시글 제목</label>
           <input
                   type="text"
@@ -77,6 +89,7 @@
             id="content"
             name="content"
             placeholder="내용 입력"
+            style="min-height: 250px"
           ></textarea>
         </div>
         <button type="submit" class="btn btn-primary">업로드</button>

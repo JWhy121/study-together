@@ -82,10 +82,12 @@ public class PostController {
     @PostMapping("/create")
     public String createPost(@RequestParam("boardId") Long id,
                              @RequestParam("language") String language,
+                             @RequestParam("password") String password,
                              @ModelAttribute PostDto postDto){
 
         postDto.setBoardId(id);
         postDto.setDevLang(language);
+        postDto.setPassword(password);
         postService.savePost(postDto);
 
         return "redirect:/boards/" + id;
@@ -95,8 +97,14 @@ public class PostController {
     @PostMapping("{id}/edit")
     public String updatePost(@PathVariable("id") Long id,
                              @RequestParam("language") String language,
+                             @RequestParam("completedRadio") String status,
                              @ModelAttribute PostPutDto postPutDto){
 
+        if(status.equals("incompleted")){
+            postPutDto.setCompleted(false);
+        }else{
+            postPutDto.setCompleted(true);
+        }
         postPutDto.setDevLang(language);
         postService.putPost(id, postPutDto);
 

@@ -29,6 +29,7 @@ public class Post extends BaseEntity {
     private String devLang;
     private String title;
     private String content;
+    private String password;
     private int watchedCnt;
     private boolean completed;
 

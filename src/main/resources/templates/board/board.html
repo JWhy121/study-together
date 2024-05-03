@@ -73,9 +73,8 @@
             >게시글 생성일</small
             >
           </div>
-<!--          <div class="fw-bold mb-1 align-self-end ms-auto p-1" th:text="${post.completed}>">-->
-<!--            스터디원 모집 중-->
-<!--          </div>-->
+          <div class="fw-bold mb-1 align-self-end ms-auto p-1 text-primary" th:text="${post.completed == false ? '스터디원 모집 중' : '모집완료'}">
+          모집 현황</div>
         </a>
         <span
           th:if="${postPage.isEmpty()}"

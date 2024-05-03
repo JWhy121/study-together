@@ -14,6 +14,7 @@ public class PostDto {
     private String content;
     private String devLang;
     private String nickname;
+    private String password;
 
 
     public Post toEntity(){
@@ -27,6 +28,7 @@ public class PostDto {
         post.setBoard(board);
         post.setDevLang(devLang);
         post.setNickname(nickname);
+        post.setPassword(password);
 
 
         return post;

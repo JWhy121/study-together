@@ -13,6 +13,8 @@ public class PostPutDto {
     private Long boardId;
     private String devLang;
     private String nickname;
+    private String password;
+    private boolean completed;
 
     public Post toEntity(){
         Post post = new Post();
@@ -25,6 +27,8 @@ public class PostPutDto {
         post.setBoard(board);
         post.setDevLang(devLang);
         post.setNickname(nickname);
+        post.setPassword(password);
+        post.setCompleted(completed);
 
 
         return post;
