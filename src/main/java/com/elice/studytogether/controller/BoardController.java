@@ -54,8 +54,8 @@ public class BoardController {
         PageRequest pageable = PageRequest.of(page, size);
 
         if (keyword != null && !keyword.isEmpty()) {
-            Page<Post> ContainingkeywordPosts = postService.searchPostByKeyword(keyword, pageable);
-            model.addAttribute("postPage", ContainingkeywordPosts);
+            Page<Post> containingkeywordPosts = postService.searchPostByKeyword(keyword, pageable);
+            model.addAttribute("postPage", containingkeywordPosts);
 
         }else {
             Page<PostResponseDto> posts = postService.retrieveAllPosts(id, pageable);
