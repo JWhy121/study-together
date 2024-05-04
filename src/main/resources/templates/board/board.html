@@ -23,7 +23,7 @@
         font-family: "Elice DX Neolli", sans-serif;
       }
     </style>
-    <title th:text="${board.board_title}"></title>
+    <title th:text="${board.boardTitle}"></title>
   </head>
   <body>
     <div class="container my-5">
@@ -34,7 +34,7 @@
         >&larr; 게시판 목록으로 돌아가기</a
       >
       <div class="header mb-5">
-        <h1 class="text-center" th:text="${board.board_title}">게시판 제목</h1>
+        <h1 class="text-center" th:text="${board.boardTitle}">게시판 제목</h1>
         <p
           class="text-center text-secondary"
           th:text="${board.description}"
@@ -62,15 +62,19 @@
       </div>
       <div class="list-group position-relative mb-3">
         <a
-          class="board-item list-group-item p-3 list-group-item-action"
+          class="board-item list-group-item p-3 list-group-item-action d-flex"
           th:unless="${postPage.isEmpty()}"
           th:each="post : ${postPage}"
           th:href="@{/posts/{postId}(postId=${post.id})}"
         >
-          <h4 class="fw-bold mb-1" th:text="${post.title}">게시글 제목</h4>
-          <small class="text-secondary" th:text="${post.createdAt}"
+          <div>
+            <h4 class="fw-bold mb-1" th:text="${post.title}">게시글 제목</h4>
+            <small class="text-secondary" th:text="${post.createdDate}"
             >게시글 생성일</small
-          >
+            >
+          </div>
+          <div class="fw-bold mb-1 align-self-end ms-auto p-1 text-primary" th:text="${post.completed == false ? '스터디원 모집 중' : '모집완료'}">
+          모집 현황</div>
         </a>
         <span
           th:if="${postPage.isEmpty()}"
