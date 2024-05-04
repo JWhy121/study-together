@@ -47,8 +47,12 @@
   </head>
   <body>
     <div class="container my-5">
-      <div class="header mb-5">
-        <h1 class="text-center">STOGETHER</h1>
+      <div class="header mb-5 d-flex justify-content-center align-items-center">
+          <img
+                  class="img-thumbnail w-30 h-30 me-3 border-0"
+                  src="STUGETHER.png"
+                  alt="STUGETHER"
+          />
       </div>
       <div class="d-flex justify-content-end mb-3">
         <a th:href="@{/boards/create}" class="btn btn-primary">게시판 추가</a>
@@ -60,6 +64,12 @@
             th:unless="${#lists.isEmpty(boards)}"
             th:each="board : ${boards}"
           >
+            <h4
+                    class="card-title fw-bold text-dark"
+                    th:text="${board.boardTitle}"
+            >
+              게시판 이름
+            </h4>
             <div
               class="card"
               onmouseover="event.currentTarget.classList.add('shadow')"
@@ -69,18 +79,7 @@
                 class="board-item pe-auto p-3 link-underline link-underline-opacity-0 d-flex"
                 th:href="@{/boards/{boardId}(boardId=${board.id})}"
               >
-                <img
-                  class="img-thumbnail w-50 h-50 me-3"
-                  src="rocket-lunch.png"
-                  alt="rocket-lunch"
-                />
                 <div>
-                  <h4
-                    class="card-title fw-bold text-dark"
-                    th:text="${board.board_title}"
-                  >
-                    게시판 이름
-                  </h4>
                   <span
                     class="card-text text-secondary text-wrap"
                     th:text="${board.description}"
