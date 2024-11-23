@@ -8,7 +8,7 @@
 
 ## ERD
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d85fd78d-de88-4966-9b27-62e3e2e8c2a0/1ada5106-0872-4fe7-938f-41b8f6b940fd/Untitled.png)
+<img width="486" alt="study_together_erd" src="https://github.com/user-attachments/assets/a7b5d365-7959-4c02-b611-36d482cfc644">
 
 ## 와이어프레임
 
