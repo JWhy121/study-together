@@ -66,47 +66,7 @@ The HTTP response header [Location] with value [[http://localhost:8080/error?mes
 
 ## 시연
 
-게시판 조회
-
-![게시판_조회](/uploads/73fddf00f06365862e1f777f3b9ca83d/게시판_조회.png)
-
-게시판 추가
-
-![게시판_추가](/uploads/311d6093b15bdc55d2baa8b2a3174306/게시판_추가.png)
-
-게시판 수정
-
-![게시판_수정](/uploads/35f0823a5bac05e50a3bb8bf3d19aa70/게시판_수정.png)
-
-게시판 삭제
-
-![게시판_삭제](/uploads/93f77f5bd08d986c4f7f36802f85f6de/게시판_삭제.png)
-
-게시글 전체 조회 (모집완료가 제일 아래에 위치 && 최신순 정렬)
-
-![게시글_전체_조회](/uploads/5478e71ccb567c38389252be9293298e/게시글_전체_조회.png)
-
-게시글 검색
-
-![게시글_검색](/uploads/5f225a4e068f65c764d98161b7fcab50/게시글_검색.png)
-
-게시글 추가
-
-![게시글_추가](/uploads/4c1ac299fc32b0bb0a438113d7fd169e/게시글_추가.png)
-
-게시글 수정
-
-![게시글_수정](/uploads/ad958f50da2b54d4f4c54f0ba1354c83/게시글_수정.png)
-
-게시글 조회
-
-![게시글](/uploads/7b1999626ff951a61118782255c9f2b7/게시글.png)
-
-댓글 조회
-
-![댓글](/uploads/54276e798d665add39c412cac7133605/댓글.png)
-
-댓글 수정
+https://github.com/user-attachments/assets/18508204-2047-491c-98f4-e5de355bf8d8
 
 ![댓글_수정](/uploads/e7bb4a3fe11b1d61d56a6f3aad954c34/댓글_수정.png)
 
