@@ -8,7 +8,7 @@
 
 ## ERD
 
-<alt="study_together_erd" src="https://github.com/user-attachments/assets/a7b5d365-7959-4c02-b611-36d482cfc644">
+<img width="600" alt="study_together_erd" src="https://github.com/user-attachments/assets/a7b5d365-7959-4c02-b611-36d482cfc644">
 
 ## 와이어프레임
 
