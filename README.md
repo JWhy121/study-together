@@ -8,7 +8,7 @@
 
 ## ERD
 
-![스크린샷_2024-05-03_오전_12.51.51](/uploads/e3119e1ec42e3c1ccc6c0b7e18f88d71/스크린샷_2024-05-03_오전_12.51.51.png)
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d85fd78d-de88-4966-9b27-62e3e2e8c2a0/1ada5106-0872-4fe7-938f-41b8f6b940fd/Untitled.png)
 
 ## 와이어프레임
 
