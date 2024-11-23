@@ -8,28 +8,25 @@
 
 ## ERD
 
-<img width="600" alt="study_together_erd" src="https://github.com/user-attachments/assets/a7b5d365-7959-4c02-b611-36d482cfc644">
+<img width="700" alt="study_together_erd" src="https://github.com/user-attachments/assets/a7b5d365-7959-4c02-b611-36d482cfc644">
 
 ## 와이어프레임
 
-![게시판_화면](/uploads/3c95483fe1fb67289ec207e3aeec33d3/게시판_화면.png)
-
-![게시판을_눌렀을_때의_화면](/uploads/f1d137e290c9099697fa567fbbf639fc/게시판을_눌렀을_때의_화면.png)
-
-![글쓰기_페이지](/uploads/47460cae6a6a8988060590207e98e42a/글쓰기_페이지.png)
-
-![내용_페이지](/uploads/3aec5c18d14f1eb2b19a0c9295cd6220/내용_페이지.png)
+<img width="700" alt="1" src="https://github.com/user-attachments/assets/7fe7377d-0d2e-4be0-846e-66693b5de209">
+<img width="700" alt="2" src="https://github.com/user-attachments/assets/40e8760e-285a-455a-956f-39d60f821094">
+<img width="700" alt="3" src="https://github.com/user-attachments/assets/98d103c7-7965-4640-897c-291576a02efb">
+<img width="700" alt="4" src="https://github.com/user-attachments/assets/8d976044-b818-4ca6-9f65-39f7fc2b9221">
 
 ## 트러블슈팅
 
-![스크린샷_2024-05-03_오전_1.06.12](/uploads/dfd2ba04e21b7ec73c7d98a909c1a745/스크린샷_2024-05-03_오전_1.06.12.png)
+<img width="557" alt="트러블슈팅" src="https://github.com/user-attachments/assets/beed4df1-aa3b-4e3c-9b5d-a3885f506bc3">
 
 The HTTP response header [Location] with value [[http://localhost:8080/error?message=비밀번호가](http://localhost:8080/error?message=%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8%EA%B0%80) 일치하지 않습니다. 다시 확인해주세요.] has been removed from the response because it is invalid
 
 - 문제상황 : 댓글을 수정하는 경우, 등록했을 당시 설정했던 비밀번호 일치 여부에 따라서 삭제 및 수정이 가능하도록 구현하는 코드를 작성했다. 데이터베이스 상에서는 정상적으로 동작을 하는데 클라이언트 쪽 화면에서 응답을 받았을 때 alert를 통해 알려주는 부분을 연결하지 못하고 있는 상황이었다.
 - 원인 : 프론트 쪽 자바스크립트 코드를 수정해야 했다. 서버로 수정 요청을 보내고 난 후 성공적인 응답을 받았을 때의 처리, 오류 응답을 받았을 때의 처리를 제대로 하지 못해서 생긴 문제였다.
 
-![스크린샷_2024-05-03_오전_1.21.22](/uploads/cf849b0786fd55d47544a558736bea1d/스크린샷_2024-05-03_오전_1.21.22.png)
+<img width="420" alt="트러블슈팅해결" src="https://github.com/user-attachments/assets/c63323d8-2573-4542-9736-37e46a01b311">
 
 - 해결방법 : fetch 함수를 사용해서 서버에 데이터를 요청하고, response.ok 응답을 받으면 댓글 수정 완료 알림창을, 인증 오류 코드인 401 응답 코드를 받으면 비밀번호 오류 알림창을 띄우는 식으로 작업을 수행해 해결했다.
 
@@ -67,9 +64,3 @@ The HTTP response header [Location] with value [[http://localhost:8080/error?mes
 ## 시연
 
 https://github.com/user-attachments/assets/18508204-2047-491c-98f4-e5de355bf8d8
-
-![댓글_수정](/uploads/e7bb4a3fe11b1d61d56a6f3aad954c34/댓글_수정.png)
-
-댓글 삭제
-
-![댓글_삭제](/uploads/4e8c76ca01783cbfe52f12998a8c3b0d/댓글_삭제.png)
